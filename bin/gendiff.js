@@ -9,6 +9,6 @@ program
   .argument('<filepath1>')
   .argument('<filepath2>')
   .version('1.0.0')
-  .option('-f, --format <type>', 'output format')
+  .option('-f, --format <type>', 'output format');
 
 program.parse();
