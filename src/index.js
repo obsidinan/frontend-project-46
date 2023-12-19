@@ -3,7 +3,7 @@ import { readFileSync } from 'node:fs';
 import parse from './parse.js';
 import compare from './compare.js';
 
-//const getExt = (filename) => path.extname(filename).slice(1);
+// const getExt = (filename) => path.extname(filename).slice(1);
 
 const getPath = (filepath) => path.resolve(process.cwd(), filepath);
 

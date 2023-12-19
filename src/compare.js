@@ -3,7 +3,7 @@ import _ from 'lodash';
 const types = {
   added: '  + ',
   removed: '  - ',
-  unchanged: '    '
+  unchanged: '    ',
 };
 
 export default (data1, data2) => {
