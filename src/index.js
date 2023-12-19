@@ -1,10 +1,21 @@
 import path from 'path';
 import { readFileSync } from 'node:fs';
+import parse from './parse.js';
+import compare from './compare.js';
+
+//const getExt = (filename) => path.extname(filename).slice(1);
 
 const getPath = (filepath) => path.resolve(process.cwd(), filepath);
 
-const getExt = (filename) => path.extname(filename).slice(1);
-
 const readFile = (filepath) => readFileSync(filepath, 'utf8');
 
-export { getPath, getExt, readFile };
+const getData = (filepath) => parse(readFile(getPath(filepath)));
+
+const getDiff = (filepath1, filepath2) => {
+  const data1 = getData(filepath1);
+  const data2 = getData(filepath2);
+
+  return compare(data1, data2);
+};
+
+export { getPath, readFile, getDiff };
