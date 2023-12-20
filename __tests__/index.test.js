@@ -1,5 +1,5 @@
 import { fileURLToPath } from 'url';
-import { dirname, path } from 'path';
+import path, { dirname } from 'path';
 import { readFileSync } from 'node:fs';
 import { getDiff } from '../src/index.js';
 
