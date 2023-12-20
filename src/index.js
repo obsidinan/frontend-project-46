@@ -1,6 +1,6 @@
 import path from 'path';
 import { readFileSync } from 'node:fs';
-import parse from './parse.js';
+import parse from './parsers.js';
 import compare from './compare.js';
 
 const getExt = (filename) => path.extname(filename).slice(1);
