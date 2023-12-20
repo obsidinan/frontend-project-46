@@ -3,13 +3,13 @@ import { readFileSync } from 'node:fs';
 import parse from './parse.js';
 import compare from './compare.js';
 
-// const getExt = (filename) => path.extname(filename).slice(1);
+const getExt = (filename) => path.extname(filename).slice(1);
 
 const getPath = (filepath) => path.resolve(process.cwd(), filepath);
 
 const readFile = (filepath) => readFileSync(filepath, 'utf8');
 
-const getData = (filepath) => parse(readFile(getPath(filepath)));
+const getData = (filepath) => parse(readFile(getPath(filepath)), getExt(filepath));
 
 const getDiff = (filepath1, filepath2) => {
   const data1 = getData(filepath1);
@@ -18,4 +18,4 @@ const getDiff = (filepath1, filepath2) => {
   return compare(data1, data2);
 };
 
-export { getPath, readFile, getDiff };
+export default getDiff;
