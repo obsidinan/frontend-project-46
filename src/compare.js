@@ -33,7 +33,7 @@ const compare = (data1, data2) => {
         key,
         type: 'object',
         children: compare(data1[key], data2[key]),
-      }
+      };
     }
     return {
       type: 'changed',

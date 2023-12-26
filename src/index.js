@@ -2,7 +2,7 @@ import path from 'path';
 import { readFileSync } from 'node:fs';
 import parse from './parsers.js';
 import compare from './compare.js';
-import stylish from './stylish.js'
+import stylish from './stylish.js';
 
 const getExt = (filename) => path.extname(filename).slice(1);
 
