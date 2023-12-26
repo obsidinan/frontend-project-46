@@ -18,7 +18,7 @@ const getDiff = (filepath1, filepath2) => {
 
   const diff = compare(data1, data2);
 
-  return stylish(diff);
+  return stylish(diff, 1);
 };
 
 export default getDiff;

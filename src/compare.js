@@ -31,7 +31,7 @@ const compare = (data1, data2) => {
     if (_.isObject(data1[key]) && _.isObject(data2[key])) {
       return {
         key,
-        type: 'object',
+        type: 'hasChildren',
         children: compare(data1[key], data2[key]),
       };
     }
