@@ -1,12 +1,6 @@
 import _ from 'lodash';
 
-const types = {
-  added: '  + ',
-  removed: '  - ',
-  unchanged: '    ',
-};
-
-export default (data1, data2) => {
+const compare = (data1, data2) => {
   const keys1 = _.keys(data1);
   const keys2 = _.keys(data2);
 
@@ -14,18 +8,42 @@ export default (data1, data2) => {
 
   const diffArray = sortedUnionKeys.map((key) => {
     if (!_.has(data1, key)) {
-      return `${types.added}${key}: ${data2[key]}`;
+      return {
+        type: 'added',
+        key,
+        value: data2[key],
+      };
     }
     if (!_.has(data2, key)) {
-      return `${types.removed}${key}: ${data1[key]}`;
+      return {
+        type: 'removed',
+        key,
+        value: data1[key],
+      };
     }
     if (data1[key] === data2[key]) {
-      return `${types.unchanged}${key}: ${data1[key]}`;
+      return {
+        type: 'unchanged',
+        key,
+        value: data1[key],
+      };
     }
-    return `${types.removed}${key}: ${data1[key]}\n${types.added}${key}: ${data2[key]}`;
+    if (_.isObject(data1[key]) && _.isObject(data2[key])) {
+      return {
+        key,
+        type: 'object',
+        children: compare(data1[key], data2[key]),
+      }
+    }
+    return {
+      type: 'changed',
+      key,
+      valueRemoved: data1[key],
+      valueAdded: data2[key],
+    };
   });
 
-  const result = ['{', ...diffArray, '}'];
-
-  return result.join('\n');
+  return diffArray;
 };
+
+export default compare;
