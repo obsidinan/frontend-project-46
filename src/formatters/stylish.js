@@ -43,6 +43,8 @@ const stylishFormatting = (string, depth = 1) => {
   }
 };
 
-export default (comparedData) => `{\n${comparedData
+const genStylishFormatting = (comparedData) => `{\n${comparedData
   .map((string) => stylishFormatting(string, 1))
   .join('\n')}\n}`;
+
+export default genStylishFormatting;
