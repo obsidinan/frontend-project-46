@@ -21,12 +21,12 @@ const formatPlain = (data, path = []) => {
           return `Property '${fullPath}' was added with value: ${currentValue}`;
         }
         case 'changed': {
-          const oldValue = prepareValue(item.valueRemoved);
-          const newValue = prepareValue(item.valueAdded);
+          const oldValue = prepareValue(item.value.valueRemoved);
+          const newValue = prepareValue(item.value.valueAdded);
           return `Property '${fullPath}' was updated. From ${oldValue} to ${newValue}`;
         }
         case 'nested':
-          return formatPlain(item.children, currentPath);
+          return formatPlain(item.value, currentPath);
         default:
           throw new Error('Unknown type!');
       }
