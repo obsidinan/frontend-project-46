@@ -1,10 +1,7 @@
 import _ from 'lodash';
 
 const compare = (data1, data2) => {
-  const keys1 = _.keys(data1);
-  const keys2 = _.keys(data2);
-
-  const sortedUnionKeys = _.sortBy(_.union(keys1, keys2));
+  const sortedUnionKeys = _.sortBy(_.union(_.keys(data1), _.keys(data2)));
 
   const diffArray = sortedUnionKeys.map((key) => {
     if (!_.has(data1, key)) {
