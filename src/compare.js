@@ -13,7 +13,7 @@ const compare = (data1, data2) => {
     }
     if (!_.has(data2, key)) {
       return {
-        type: 'removed',
+        type: 'deleted',
         key,
         value: data1[key],
       };
@@ -28,7 +28,7 @@ const compare = (data1, data2) => {
     if (_.isObject(data1[key]) && _.isObject(data2[key])) {
       return {
         key,
-        type: 'hasChildren',
+        type: 'nested',
         children: compare(data1[key], data2[key]),
       };
     }
