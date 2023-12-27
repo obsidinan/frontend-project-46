@@ -15,15 +15,15 @@ const formatPlain = (data, path = []) => {
       const fullPath = currentPath.join('.');
       switch (item.type) {
         case 'removed':
-          return `Property ${fullPath} was removed`;
+          return `Property '${fullPath}' was removed`;
         case 'added': {
           const currentValue = prepareValue(item.value);
-          return `Property ${fullPath} was added with value: ${currentValue}`;
+          return `Property '${fullPath}' was added with value: ${currentValue}`;
         }
         case 'changed': {
-          const oldValue = prepareValue(item.valueBefore);
-          const newValue = prepareValue(item.valueAfter);
-          return `Property ${fullPath} was updated. From ${oldValue} to ${newValue}`;
+          const oldValue = prepareValue(item.valueRemoved);
+          const newValue = prepareValue(item.valueAdded);
+          return `Property '${fullPath}' was updated. From ${oldValue} to ${newValue}`;
         }
         case 'hasChildren':
           return formatPlain(item.children, currentPath);
