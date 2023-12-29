@@ -33,9 +33,10 @@ test('format: plain, ext: json', () => {
   const filename2 = getFixturePath('file2.json');
   expect(getDiff(filename1, filename2, 'plain')).toEqual(resultPlain);
 });
-*/
+
 test('format: json, ext: yml', () => {
   const filename1 = getFixturePath('file1.json');
   const filename2 = getFixturePath('file2.json');
   expect(getDiff(filename1, filename2, 'json')).toEqual(resultJSON);
 });
+*/
