@@ -26,7 +26,7 @@ const formatPlain = (data, path = []) => {
           return `Property '${fullPath}' was updated. From ${oldValue} to ${newValue}`;
         }
         case 'nested':
-          return formatPlain(item.children, currentPath);
+          return formatPlain(item.value, currentPath);
         default:
           throw new Error('Unknown type!');
       }
