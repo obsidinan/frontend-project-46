@@ -13,13 +13,13 @@ beforeEach(() => {
   result = readFileSync(getFixturePath('result-stylish.txt'), 'utf8');
 });
 
-test('format: stylish, ext: json', () => {
+test('json', () => {
   const filename1 = getFixturePath('file1.json');
   const filename2 = getFixturePath('file2.json');
   expect(getDiff(filename1, filename2)).toEqual(result);
 });
 
-test('format: stylish, ext: yaml', () => {
+test('yaml', () => {
   const filename1 = getFixturePath('file1.yml');
   const filename2 = getFixturePath('file2.yml');
   expect(getDiff(filename1, filename2)).toEqual(result);
