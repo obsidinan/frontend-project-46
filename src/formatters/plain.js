@@ -1,30 +1,32 @@
 import _ from 'lodash';
 
-const prepareValue = (nodeValue) => {
-  if (_.isObject(nodeValue)) {
+const prepareValue = (value) => {
+  if (_.isObject(value)) {
     return '[complex value]';
   }
-  return typeof nodeValue === 'string' ? `'${nodeValue}'` : nodeValue;
+  return typeof value === 'string' ? `'${value}'` : value;
 };
 
-const formatPlain = (data, path = '') => {
+const formatPlain = (data, path = []) => {
   const result = data
-    .filter((node) => node.type !== 'unchanged')
-    .map((node) => {
-      const currentPath = path === '' ? node.key : `${path}.${node.key}`;
-      switch (node.type) {
+    .filter((item) => item.type !== 'unchanged')
+    .map((item) => {
+      const currentPath = path.concat(item.key);
+      const fullPath = currentPath.join('.');
+      switch (item.type) {
         case 'deleted':
-          return `Property '${currentPath}' was removed`;
+          return `Property '${fullPath}' was removed`;
         case 'added': {
-          return `Property '${currentPath}' was added with value: ${prepareValue(node.value)}`;
+          const currentValue = prepareValue(item.value);
+          return `Property '${fullPath}' was added with value: ${currentValue}`;
         }
         case 'changed': {
-          const oldValue = prepareValue(node.value.valueRemoved);
-          const newValue = prepareValue(node.value.valueAdded);
-          return `Property '${currentPath}' was updated. From ${oldValue} to ${newValue}`;
+          const oldValue = prepareValue(item.value.valueRemoved);
+          const newValue = prepareValue(item.value.valueAdded);
+          return `Property '${fullPath}' was updated. From ${oldValue} to ${newValue}`;
         }
         case 'nested':
-          return formatPlain(node.children, currentPath);
+          return formatPlain(item.children, currentPath);
         default:
           throw new Error('Unknown type!');
       }
