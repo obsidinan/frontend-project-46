@@ -8,10 +8,8 @@ const __dirname = dirname(__filename);
 
 const getFixturePath = (filename) => path.join(__dirname, '..', '__fixtures__', filename);
 
-let result;
-beforeEach(() => {
-  result = readFileSync(getFixturePath('result.txt'), 'utf8');
-});
+const result = readFileSync(getFixturePath('result.txt'), 'utf8');
+
 
 test('json', () => {
   const filename1 = getFixturePath('file1.json');
