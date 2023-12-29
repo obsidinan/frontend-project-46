@@ -13,29 +13,29 @@ const indent = (depth) => {
   return space.repeat(depth * 4 - 2);
 };
 
-const stringify = (item, depth = 1) => {
-  if (!_.isObject(item)) {
-    return item;
+const stringify = (node, depth = 1) => {
+  if (!_.isObject(node)) {
+    return node;
   }
-  const keys = Object.keys(item);
+  const keys = Object.keys(node);
   const getKeys = keys.map(
-    (key) => `${indent(depth + 1)}  ${key}: ${stringify(item[key], depth + 1)}`,
+    (key) => `${indent(depth + 1)}  ${key}: ${stringify(node[key], depth + 1)}`,
   );
   return `{\n${getKeys.join('\n')}\n  ${indent(depth)}}`;
 };
 
-const stylishFormatting = (string, depth = 1) => {
-  switch (string.type) {
+const stylishFormatting = (node, depth = 1) => {
+  switch (node.type) {
     case 'added':
     case 'deleted':
     case 'unchanged':
-      return `${indent(depth)}${types[string.type]} ${string.key}: ${stringify(string.value, depth)}`;
+      return `${indent(depth)}${types[node.type]} ${node.key}: ${stringify(node.value, depth)}`;
     case 'changed':
-      return `${indent(depth)}${types.deleted} ${string.key}: ${
-        stringify(string.value.valueRemoved, depth)
-      }\n${indent(depth)}${types.added} ${string.key}: ${stringify(string.value.valueAdded, depth)}`;
+      return `${indent(depth)}${types.deleted} ${node.key}: ${
+        stringify(node.value.valueRemoved, depth)
+      }\n${indent(depth)}${types.added} ${node.key}: ${stringify(node.value.valueAdded, depth)}`;
     case 'nested':
-      return `${indent(depth)}${types[string.type]} ${string.key}: {\n${string.children
+      return `${indent(depth)}${types[node.type]} ${node.key}: {\n${node.children
         .map((childrenValue) => stylishFormatting(childrenValue, depth + 1))
         .join('\n')}\n ${indent(depth)} }`;
     default:
