@@ -32,10 +32,10 @@ const stylishFormatting = (string, depth = 1) => {
       return `${indent(depth)}${types[string.type]} ${string.key}: ${stringify(string.value, depth)}`;
     case 'changed':
       return `${indent(depth)}${types.deleted} ${string.key}: ${
-        stringify(string.value.valueRemoved, depth)
-      }\n${indent(depth)}${types.added} ${string.key}: ${stringify(string.value.valueAdded, depth)}`;
+        stringify(string.valueRemoved, depth)
+      }\n${indent(depth)}${types.added} ${string.key}: ${stringify(string.valueAdded, depth)}`;
     case 'nested':
-      return `${indent(depth)}${types[string.type]} ${string.key}: {\n${string.value
+      return `${indent(depth)}${types[string.type]} ${string.key}: {\n${string.children
         .map((childrenValue) => stylishFormatting(childrenValue, depth + 1))
         .join('\n')}\n ${indent(depth)} }`;
     default:
