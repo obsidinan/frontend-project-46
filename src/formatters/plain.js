@@ -1,4 +1,4 @@
-import _ from 'lodash';
+/* import _ from 'lodash';
 
 const prepareValue = (nodeValue) => {
   if (_.isObject(nodeValue)) {
@@ -33,3 +33,4 @@ const formatPlain = (data, path = '') => {
 };
 
 export default formatPlain;
+*/
