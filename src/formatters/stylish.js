@@ -2,10 +2,10 @@ import _ from 'lodash';
 
 const types = {
   added: '+',
-  deleted: '-',
+  removed: '-',
   unchanged: ' ',
   changed: ' ',
-  nested: ' ',
+  hasChildren: ' ',
 };
 
 const indent = (depth) => {
@@ -27,14 +27,14 @@ const stringify = (item, depth = 1) => {
 const stylishFormatting = (string, depth = 1) => {
   switch (string.type) {
     case 'added':
-    case 'deleted':
+    case 'removed':
     case 'unchanged':
       return `${indent(depth)}${types[string.type]} ${string.key}: ${stringify(string.value, depth)}`;
     case 'changed':
-      return `${indent(depth)}${types.deleted} ${string.key}: ${
+      return `${indent(depth)}${types.removed} ${string.key}: ${
         stringify(string.valueRemoved, depth)
       }\n${indent(depth)}${types.added} ${string.key}: ${stringify(string.valueAdded, depth)}`;
-    case 'nested':
+    case 'hasChildren':
       return `${indent(depth)}${types[string.type]} ${string.key}: {\n${string.children
         .map((childrenValue) => stylishFormatting(childrenValue, depth + 1))
         .join('\n')}\n ${indent(depth)} }`;

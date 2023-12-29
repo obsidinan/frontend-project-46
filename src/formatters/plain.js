@@ -14,7 +14,7 @@ const formatPlain = (data, path = []) => {
       const currentPath = path.concat(item.key);
       const fullPath = currentPath.join('.');
       switch (item.type) {
-        case 'deleted':
+        case 'removed':
           return `Property '${fullPath}' was removed`;
         case 'added': {
           const currentValue = prepareValue(item.value);
@@ -25,7 +25,7 @@ const formatPlain = (data, path = []) => {
           const newValue = prepareValue(item.valueAdded);
           return `Property '${fullPath}' was updated. From ${oldValue} to ${newValue}`;
         }
-        case 'nested':
+        case 'hasChildren':
           return formatPlain(item.children, currentPath);
         default:
           throw new Error('Unknown type!');
