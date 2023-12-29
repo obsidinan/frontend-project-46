@@ -10,7 +10,6 @@ const getFixturePath = (filename) => path.join(__dirname, '..', '__fixtures__', 
 
 const result = readFileSync(getFixturePath('result.txt'), 'utf8');
 
-
 test('json', () => {
   const filename1 = getFixturePath('file1.json');
   const filename2 = getFixturePath('file2.json');

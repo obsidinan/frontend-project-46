@@ -1,7 +1,6 @@
 import formatPlain from './plain.js';
 import formatStylish from './stylish.js';
-import formatJson from './json.js'
-
+import formatJson from './json.js';
 
 const formatters = {
   plain: formatPlain,
