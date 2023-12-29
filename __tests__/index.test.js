@@ -27,13 +27,13 @@ test('format: stylish, ext: yaml', () => {
   const filename2 = getFixturePath('file2.yml');
   expect(getDiff(filename1, filename2)).toEqual(result);
 });
-/*
+
 test('format: plain, ext: json', () => {
   const filename1 = getFixturePath('file1.json');
   const filename2 = getFixturePath('file2.json');
   expect(getDiff(filename1, filename2, 'plain')).toEqual(resultPlain);
 });
-*/
+
 test('format: json, ext: yml', () => {
   const filename1 = getFixturePath('file1.json');
   const filename2 = getFixturePath('file2.json');
