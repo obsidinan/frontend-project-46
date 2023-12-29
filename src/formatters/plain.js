@@ -8,9 +8,7 @@ const prepareValue = (value) => {
 };
 
 const formatPlain = (data, path = []) => {
-  const result = data
-    .filter((item) => item.type !== 'unchanged')
-    .map((item) => {
+  const result = data.map((item) => {
       const currentPath = path.concat(item.key);
       const fullPath = currentPath.join('.');
       switch (item.type) {
@@ -27,11 +25,13 @@ const formatPlain = (data, path = []) => {
         }
         case 'nested':
           return formatPlain(item.children, currentPath);
+        case 'unchanged':
+          return '';
         default:
           throw new Error('Unknown type!');
       }
     });
-  return result.join('\n');
+  return result.filter((outputLine) => outputLine.length > 0).join('\n');
 };
 
 export default formatPlain;
