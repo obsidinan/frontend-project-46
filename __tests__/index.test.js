@@ -13,7 +13,7 @@ beforeEach(() => {
   result = readFileSync(getFixturePath('result-stylish.txt'), 'utf8');
 });
 
-const resultPlain = readFileSync(getFixturePath('result-plain.txt'), 'utf8');
+// const resultPlain = readFileSync(getFixturePath('result-plain.txt'), 'utf8');
 const resultJSON = readFileSync(getFixturePath('result-json.txt'), 'utf8');
 
 test('format: stylish, ext: json', () => {
