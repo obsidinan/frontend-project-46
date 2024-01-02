@@ -10,10 +10,10 @@ const compare = (data1, data2) => {
     if (!_.has(data2, key)) {
       return { type: 'deleted', key, value: data1[key] };
     }
-    if (data1[key] === data2[key]) {
+    if (_.isEqual(data1[key], data2[key])) {
       return { type: 'unchanged', key, value: data1[key] };
     }
-    if (_.isObject(data1[key]) && _.isObject(data2[key])) {
+    if (_.isPlainObject(data1[key]) && _.isPlainObject(data2[key])) {
       return { key, type: 'nested', children: compare(data1[key], data2[key]) };
     }
     return {
