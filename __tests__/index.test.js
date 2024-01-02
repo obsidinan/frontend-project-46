@@ -17,7 +17,7 @@ const resultJSON = readFileSync(getFixturePath('result-json.txt'), 'utf8');
 test.each(extensions)('tests for different extentions of files', (extension) => {
   const filename1 = getFixturePath(`file1${extension}`);
   const filename2 = getFixturePath(`file2${extension}`);
-  const currentStylish = genDiff(filename1, filename2, 'stylish')
+  const currentStylish = genDiff(filename1, filename2, 'stylish');
   expect(currentStylish).toEqual(resultStylish);
   const currentDefault = genDiff(filename1, filename2);
   expect(currentDefault).toEqual(resultStylish);
