@@ -26,7 +26,7 @@ const formatPlain = (data, path = '') => {
         case 'nested':
           return formatPlain(node.children, currentPath);
         default:
-          throw new Error('Unknown type!');
+          throw new Error(`Unknown type '${node.type}'!`);
       }
     });
   return result.join('\n');

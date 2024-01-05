@@ -39,7 +39,7 @@ const stylishFormatting = (node, depth = 1) => {
         .map((childrenValue) => stylishFormatting(childrenValue, depth + 1))
         .join('\n')}\n ${indent(depth)} }`;
     default:
-      throw new Error('Unknown type');
+      throw new Error(`Unknown type '${node.type}'!`);
   }
 };
 

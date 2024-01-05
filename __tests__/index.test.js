@@ -14,15 +14,17 @@ const resultStylish = readFileSync(getFixturePath('result-stylish.txt'), 'utf8')
 const resultPlain = readFileSync(getFixturePath('result-plain.txt'), 'utf8');
 const resultJSON = readFileSync(getFixturePath('result-json.txt'), 'utf8');
 
-test.each(extensions)('tests for different extentions of files', (extension) => {
-  const filename1 = getFixturePath(`file1${extension}`);
-  const filename2 = getFixturePath(`file2${extension}`);
-  const currentStylish = genDiff(filename1, filename2, 'stylish');
-  expect(currentStylish).toEqual(resultStylish);
-  const currentDefault = genDiff(filename1, filename2);
-  expect(currentDefault).toEqual(resultStylish);
-  const currentPlain = genDiff(filename1, filename2, 'plain');
-  expect(currentPlain).toEqual(resultPlain);
-  const currentJSON = genDiff(filename1, filename2, 'json');
-  expect(currentJSON).toEqual(resultJSON);
+const formatters = [
+  { formatter: 'stylish', expected: resultStylish },
+  { formatter: 'plain', expected: resultPlain },
+  { formatter: 'json', expected: resultJSON },
+];
+
+describe.each(formatters)(`test all formats and formatters`, ({ formatter, expected }) => {
+  test.each(extensions)(`test ${formatter}`, (extension) => {
+    const filename1 = getFixturePath(`file1${extension}`);
+    const filename2 = getFixturePath(`file2${extension}`);
+    const currentformat = genDiff(filename1, filename2, formatter);
+    expect(currentformat).toEqual(expected);
+  });
 });
