@@ -20,7 +20,7 @@ const formatters = [
   { formatter: 'json', expected: resultJSON },
 ];
 
-describe.each(formatters)(`test all formats and formatters`, ({ formatter, expected }) => {
+describe.each(formatters)('test all formats and formatters', ({ formatter, expected }) => {
   test.each(extensions)(`test ${formatter}`, (extension) => {
     const filename1 = getFixturePath(`file1${extension}`);
     const filename2 = getFixturePath(`file2${extension}`);
